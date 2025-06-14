@@ -1,0 +1,20 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../NTT_Accelerator.srcs/sources_1/ip/reconstruct_rom/sim/reconstruct_rom.v" \
+"../../../../NTT_Accelerator.srcs/sources_1/ip/add32_rom/sim/add32_rom.v" \
+"../../../../NTT_Accelerator.srcs/sources_1/ip/add31_rom/sim/add31_rom.v" \
+"../../../../NTT_Accelerator.srcs/sources_1/ip/add7_rom/sim/add7_rom.v" \
+"../../../../NTT_Accelerator.srcs/sources_1/ip/index32_rom/sim/index32_rom.v" \
+"../../../../NTT_Accelerator.srcs/sources_1/ip/index31_rom/sim/index31_rom.v" \
+"../../../../NTT_Accelerator.srcs/sources_1/ip/index7_rom/sim/index7_rom.v" \
+"../../../../NTT_Accelerator.srcs/sources_1/new/DBU.v" \
+"../../../../NTT_Accelerator.srcs/sources_1/new/DMM_v2.v" \
+
+sv xil_defaultlib  \
+"../../../../NTT_Accelerator.srcs/sim_1/new/DBU_tb.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
