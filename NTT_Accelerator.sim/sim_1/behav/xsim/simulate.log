@@ -1,0 +1,358 @@
+Vivado Simulator 2018.3
+Time resolution is 1 ps
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module DMM_tb.uut.rom_index7_x.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module DMM_tb.uut.rom_index7_y.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module DMM_tb.uut.rom_index31_x.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module DMM_tb.uut.rom_index31_y.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module DMM_tb.uut.rom_index32_x.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module DMM_tb.uut.rom_index32_y.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module DMM_tb.uut.rom_add7.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module DMM_tb.uut.rom_add31.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module DMM_tb.uut.rom_add32.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module DMM_tb.uut.rom_recon.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+$finish called at time : 0 fs : File "E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.srcs/sim_1/new/DMM_tb.sv" Line 42
+ened table3_sheet3.txt
+Successfully opened table3_sheet4.txt
+Successfully opened table3_sheet5.txt
+Successfully opened table3_sheet6.txt
+Successfully opened table3_sheet7.txt
+Starting DMM_v2 test...
+Time=5000, x1=   1, y1=   2, x2=   3, y2=   4, z1=   0, z2=   0
+Time=25000, x1=   1, y1=   2, x2=   3, y2=   4, z1=   x, z2=   x
+Time=35000, x1=   1, y1=   2, x2=   3, y2=   4, z1=   1, z2=   1
+Time=55000, x1=   1, y1=   2, x2=   3, y2=   4, z1=   x, z2=   x
+Time=65000, x1=   1, y1=   2, x2=   3, y2=   4, z1=   1, z2=   1
+Time=85000, x1=   1, y1=   2, x2=   3, y2=   4, z1=   x, z2=   x
+Time=95000, x1=   1, y1=   2, x2=   3, y2=   4, z1=   2, z2=  12
+Test passed: x1=   1, y1=   2, x2=   3, y2=   4
+Time=105000, x1=   5, y1=   6, x2=   7, y2=   8, z1=   2, z2=  12
+Time=195000, x1=   5, y1=   6, x2=   7, y2=   8, z1=  30, z2=  56
+Test passed: x1=   5, y1=   6, x2=   7, y2=   8
+Time=205000, x1= 100, y1= 200, x2= 300, y2= 400, z1=  30, z2=  56
+Time=295000, x1= 100, y1= 200, x2= 300, y2= 400, z1=  26, z2= 156
+Test passed: x1= 100, y1= 200, x2= 300, y2= 400
+Time=305000, x1=1000, y1=2000, x2=3000, y2=3328, z1=  26, z2= 156
+Time=395000, x1=1000, y1=2000, x2=3000, y2=3328, z1=2600, z2= 329
+Test passed: x1=1000, y1=2000, x2=3000, y2=3328
+Time=405000, x1=2683, y1= 272, x2=1487, y2=  15, z1=2600, z2= 329
+Time=495000, x1=2683, y1= 272, x2=1487, y2=  15, z1= 725, z2=2331
+Test passed: x1=2683, y1= 272, x2=1487, y2=  15
+Time=505000, x1= 235, y1= 340, x2= 521, y2=2553, z1= 725, z2=2331
+Time=595000, x1= 235, y1= 340, x2= 521, y2=2553, z1=   4, z2=1842
+Test passed: x1= 235, y1= 340, x2= 521, y2=2553
+Time=605000, x1=2588, y1=1644, x2=1215, y2=1470, z1=   4, z2=1842
+Time=695000, x1=2588, y1=1644, x2=1215, y2=1470, z1= 210, z2=1706
+Test passed: x1=2588, y1=1644, x2=1215, y2=1470
+Time=705000, x1=1984, y1=2724, x2= 694, y2= 879, z1= 210, z2=1706
+Time=795000, x1=1984, y1=2724, x2= 694, y2= 879, z1=1449, z2= 819
+Test passed: x1=1984, y1=2724, x2= 694, y2= 879
+Time=805000, x1=1039, y1=1909, x2=2349, y2= 683, z1=1449, z2= 819
+Time=895000, x1=1039, y1=1909, x2=2349, y2= 683, z1=2696, z2=3118
+Test passed: x1=1039, y1=1909, x2=2349, y2= 683
+Time=905000, x1=2293, y1=2679, x2= 209, y2= 991, z1=2696, z2=3118
+Time=995000, x1=2293, y1=2679, x2= 209, y2= 991, z1= 942, z2= 721
+Test passed: x1=2293, y1=2679, x2= 209, y2= 991
+Time=1005000, x1=1259, y1=2558, x2= 321, y2=2199, z1= 942, z2= 721
+Time=1095000, x1=1259, y1=2558, x2= 321, y2=2199, z1=1379, z2= 131
+Test passed: x1=1259, y1=2558, x2= 321, y2=2199
+Time=1105000, x1=1908, y1=1518, x2=2826, y2=1815, z1=1379, z2= 131
+Time=1195000, x1=1908, y1=1518, x2=2826, y2=1815, z1= 114, z2=2530
+Test passed: x1=1908, y1=1518, x2=2826, y2=1815
+Time=1205000, x1=1736, y1= 806, x2=2661, y2=2291, z1= 114, z2=2530
+Time=1295000, x1=1736, y1= 806, x2=2661, y2=2291, z1=1036, z2= 952
+Test passed: x1=1736, y1= 806, x2=2661, y2=2291
+Time=1305000, x1= 972, y1=2158, x2=2753, y2=2708, z1=1036, z2= 952
+Time=1395000, x1= 972, y1=2158, x2=2753, y2=2708, z1= 306, z2=1493
+Test passed: x1= 972, y1=2158, x2=2753, y2=2708
+Time=1405000, x1= 624, y1= 733, x2= 317, y2=1596, z1= 306, z2=1493
+Time=1495000, x1= 624, y1= 733, x2= 317, y2=1596, z1=1319, z2=3253
+Test passed: x1= 624, y1= 733, x2= 317, y2=1596
+Time=1505000, x1=2891, y1= 730, x2=2951, y2=2162, z1=1319, z2=3253
+Time=1595000, x1=2891, y1= 730, x2=2951, y2=2162, z1=3173, z2=1698
+Test passed: x1=2891, y1= 730, x2=2951, y2=2162
+Time=1605000, x1= 110, y1=1915, x2=2405, y2= 660, z1=3173, z2=1698
+Time=1695000, x1= 110, y1=1915, x2=2405, y2= 660, z1= 923, z2=2696
+Test passed: x1= 110, y1=1915, x2=2405, y2= 660
+Time=1705000, x1=1292, y1=3015, x2= 482, y2=1402, z1= 923, z2=2696
+Time=1795000, x1=1292, y1=3015, x2= 482, y2=1402, z1= 450, z2=3306
+Test passed: x1=1292, y1=3015, x2= 482, y2=1402
+Time=1805000, x1=1237, y1= 546, x2=3051, y2=2529, z1= 450, z2=3306
+Time=1895000, x1=1237, y1= 546, x2=3051, y2=2529, z1=2944, z2=2686
+Test passed: x1=1237, y1= 546, x2=3051, y2=2529
+Time=1905000, x1=2209, y1=3168, x2= 238, y2=2093, z1=2944, z2=2686
+Time=1995000, x1=2209, y1=3168, x2= 238, y2=2093, z1= 554, z2=2113
+Test passed: x1=2209, y1=3168, x2= 238, y2=2093
+Time=2005000, x1=1373, y1=3289, x2=1293, y2=1241, z1= 554, z2=2113
+Time=2095000, x1=1373, y1=3289, x2=1293, y2=1241, z1=1673, z2=  35
+Test passed: x1=1373, y1=3289, x2=1293, y2=1241
+Time=2105000, x1=3128, y1=1531, x2=   5, y2=2160, z1=1673, z2=  35
+Time=2195000, x1=3128, y1=1531, x2=   5, y2=2160, z1=1866, z2= 813
+Test passed: x1=3128, y1=1531, x2=   5, y2=2160
+Time=2205000, x1= 138, y1=3275, x2=2049, y2=1913, z1=1866, z2= 813
+Time=2295000, x1= 138, y1=3275, x2=2049, y2=1913, z1=2535, z2=1504
+Test passed: x1= 138, y1=3275, x2=2049, y2=1913
+Time=2305000, x1= 124, y1= 701, x2= 380, y2=1251, z1=2535, z2=1504
+Time=2395000, x1= 124, y1= 701, x2= 380, y2=1251, z1= 370, z2=2662
+Test passed: x1= 124, y1= 701, x2= 380, y2=1251
+Time=2405000, x1=2623, y1=2429, x2= 823, y2=1395, z1= 370, z2=2662
+Time=2495000, x1=2623, y1=2429, x2= 823, y2=1395, z1=2890, z2=2909
+Test passed: x1=2623, y1=2429, x2= 823, y2=1395
+Time=2505000, x1=1777, y1=2191, x2=1293, y2=2060, z1=2890, z2=2909
+Time=2595000, x1=1777, y1=2191, x2=1293, y2=2060, z1=1806, z2= 380
+Test passed: x1=1777, y1=2191, x2=1293, y2=2060
+Time=2605000, x1=3267, y1=2116, x2=2102, y2=2704, z1=1806, z2= 380
+Time=2695000, x1=3267, y1=2116, x2=2102, y2=2704, z1=1968, z2=1205
+Test passed: x1=3267, y1=2116, x2=2102, y2=2704
+Time=2705000, x1= 614, y1=  66, x2=1070, y2= 552, z1=1968, z2=1205
+Time=2795000, x1= 614, y1=  66, x2=1070, y2= 552, z1= 576, z2=1407
+Test passed: x1= 614, y1=  66, x2=1070, y2= 552
+Time=2805000, x1=2182, y1=3172, x2= 915, y2= 455, z1= 576, z2=1407
+Time=2895000, x1=2182, y1=3172, x2= 915, y2= 455, z1= 313, z2= 200
+Test passed: x1=2182, y1=3172, x2= 915, y2= 455
+Time=2905000, x1=3238, y1=2973, x2=2984, y2=3079, z1= 313, z2= 200
+Time=2995000, x1=3238, y1=2973, x2=2984, y2=3079, z1=2435, z2=3025
+Test passed: x1=3238, y1=2973, x2=2984, y2=3079
+Time=3005000, x1=2816, y1=1558, x2=2182, y2=2725, z1=2435, z2=3025
+Time=3095000, x1=2816, y1=1558, x2=2182, y2=2725, z1=3035, z2= 356
+Test passed: x1=2816, y1=1558, x2=2182, y2=2725
+Time=3105000, x1=3179, y1= 849, x2=2111, y2=2666, z1=3035, z2= 356
+Time=3195000, x1=3179, y1= 849, x2=2111, y2=2666, z1=2481, z2=1916
+Test passed: x1=3179, y1= 849, x2=2111, y2=2666
+Time=3205000, x1=  66, y1=3305, x2= 710, y2= 904, z1=2481, z2=1916
+Time=3295000, x1=  66, y1=3305, x2= 710, y2= 904, z1=1745, z2=2672
+Test passed: x1=  66, y1=3305, x2= 710, y2= 904
+Time=3305000, x1= 460, y1=1468, x2=1230, y2=1514, z1=1745, z2=2672
+Time=3395000, x1= 460, y1=1468, x2=1230, y2=1514, z1=2822, z2=1309
+Test passed: x1= 460, y1=1468, x2=1230, y2=1514
+Time=3405000, x1=1444, y1= 587, x2=1066, y2= 551, z1=2822, z2=1309
+Time=3495000, x1=1444, y1= 587, x2=1066, y2= 551, z1=2062, z2=1462
+Test passed: x1=1444, y1= 587, x2=1066, y2= 551
+Time=3505000, x1=2055, y1= 943, x2=2065, y2=2146, z1=2062, z2=1462
+Time=3595000, x1=2055, y1= 943, x2=2065, y2=2146, z1= 387, z2= 591
+Test passed: x1=2055, y1= 943, x2=2065, y2=2146
+Time=3605000, x1=1530, y1=3131, x2=2697, y2=2232, z1= 387, z2= 591
+Time=3695000, x1=1530, y1=3131, x2=2697, y2=2232, z1=3328, z2= 872
+Test passed: x1=1530, y1=3131, x2=2697, y2=2232
+Time=3705000, x1=1733, y1=  80, x2= 684, y2=1910, z1=3328, z2= 872
+Time=3795000, x1=1733, y1=  80, x2= 684, y2=1910, z1=2151, z2=1472
+Test passed: x1=1733, y1=  80, x2= 684, y2=1910
+Time=3805000, x1=2847, y1=  52, x2=1801, y2=1251, z1=2151, z2=1472
+Time=3895000, x1=2847, y1=  52, x2=1801, y2=1251, z1=1568, z2=2647
+Test passed: x1=2847, y1=  52, x2=1801, y2=1251
+Time=3905000, x1=2108, y1=2485, x2=1809, y2=1626, z1=1568, z2=2647
+Time=3995000, x1=2108, y1=2485, x2=1809, y2=1626, z1=1863, z2=1927
+Test passed: x1=2108, y1=2485, x2=1809, y2=1626
+Time=4005000, x1=1184, y1=1269, x2=2513, y2=2928, z1=1863, z2=1927
+Time=4095000, x1=1184, y1=1269, x2=2513, y2=2928, z1=1117, z2= 974
+Test passed: x1=1184, y1=1269, x2=2513, y2=2928
+Time=4105000, x1=1414, y1= 993, x2=1225, y2=1245, z1=1117, z2= 974
+Time=4195000, x1=1414, y1= 993, x2=1225, y2=1245, z1=2593, z2= 443
+Test passed: x1=1414, y1= 993, x2=1225, y2=1245
+Time=4205000, x1=2262, y1= 409, x2= 844, y2=2323, z1=2593, z2= 443
+Time=4295000, x1=2262, y1= 409, x2= 844, y2=2323, z1=3025, z2=3160
+Test passed: x1=2262, y1= 409, x2= 844, y2=2323
+Time=4305000, x1=2390, y1=1705, x2=1228, y2=2312, z1=3025, z2=3160
+Time=4395000, x1=2390, y1=1705, x2=1228, y2=2312, z1= 254, z2=2828
+Test passed: x1=2390, y1=1705, x2=1228, y2=2312
+Time=4405000, x1=2114, y1= 719, x2=3282, y2= 811, z1= 254, z2=2828
+Time=4495000, x1=2114, y1= 719, x2=3282, y2= 811, z1=1942, z2=1831
+Test passed: x1=2114, y1= 719, x2=3282, y2= 811
+Time=4505000, x1=2424, y1=3157, x2=3123, y2=3186, z1=1942, z2=1831
+Time=4595000, x1=2424, y1=3157, x2=3123, y2=3186, z1=2526, z2=2826
+Test passed: x1=2424, y1=3157, x2=3123, y2=3186
+Time=4605000, x1=1536, y1=1723, x2= 668, y2=2607, z1=2526, z2=2826
+Time=4695000, x1=1536, y1=1723, x2= 668, y2=2607, z1=3302, z2= 409
+Test passed: x1=1536, y1=1723, x2= 668, y2=2607
+Time=4705000, x1= 199, y1=2438, x2= 123, y2=1735, z1=3302, z2= 409
+Time=4795000, x1= 199, y1=2438, x2= 123, y2=1735, z1=2457, z2= 349
+Test passed: x1= 199, y1=2438, x2= 123, y2=1735
+Time=4805000, x1=1820, y1=2767, x2=2001, y2=3007, z1=2457, z2= 349
+Time=4895000, x1=1820, y1=2767, x2=2001, y2=3007, z1=2492, z2=1504
+Test passed: x1=1820, y1=2767, x2=2001, y2=3007
+Time=4905000, x1= 523, y1= 772, x2=2401, y2=1979, z1=2492, z2=1504
+Time=4995000, x1= 523, y1= 772, x2=2401, y2=1979, z1= 947, z2=1096
+Test passed: x1= 523, y1= 772, x2=2401, y2=1979
+Time=5005000, x1=2186, y1=3050, x2=1657, y2= 369, z1= 947, z2=1096
+Time=5095000, x1=2186, y1=3050, x2=1657, y2= 369, z1=2642, z2=2226
+Test passed: x1=2186, y1=3050, x2=1657, y2= 369
+Time=5105000, x1= 128, y1= 365, x2= 995, y2=2314, z1=2642, z2=2226
+Time=5195000, x1= 128, y1= 365, x2= 995, y2=2314, z1= 114, z2=2091
+Test passed: x1= 128, y1= 365, x2= 995, y2=2314
+Time=5205000, x1=  86, y1=2652, x2=1330, y2= 214, z1= 114, z2=2091
+Time=5295000, x1=  86, y1=2652, x2=1330, y2= 214, z1=1700, z2=1655
+Test passed: x1=  86, y1=2652, x2=1330, y2= 214
+Time=5305000, x1=3017, y1=3313, x2=1175, y2=1750, z1=1700, z2=1655
+Time=5395000, x1=3017, y1=3313, x2=1175, y2=1750, z1=1663, z2=2257
+Test passed: x1=3017, y1=3313, x2=1175, y2=1750
+Time=5405000, x1= 296, y1=1153, x2= 611, y2=1960, z1=1663, z2=2257
+Time=5495000, x1= 296, y1=1153, x2= 611, y2=1960, z1=1730, z2=2449
+Test passed: x1= 296, y1=1153, x2= 611, y2=1960
+Time=5505000, x1=2125, y1=1422, x2=1370, y2=1068, z1=1730, z2=2449
+Time=5595000, x1=2125, y1=1422, x2=1370, y2=1068, z1=2347, z2=1729
+Test passed: x1=2125, y1=1422, x2=1370, y2=1068
+Time=5605000, x1=2575, y1= 628, x2=2664, y2=  18, z1=2347, z2=1729
+Time=5695000, x1=2575, y1= 628, x2=2664, y2=  18, z1=2535, z2=1346
+Test passed: x1=2575, y1= 628, x2=2664, y2=  18
+Time=5705000, x1=2050, y1=2681, x2= 722, y2=3272, z1=2535, z2=1346
+Time=5795000, x1=2050, y1=2681, x2= 722, y2=3272, z1=3200, z2=2123
+Test passed: x1=2050, y1=2681, x2= 722, y2=3272
+Time=5805000, x1=3309, y1=2398, x2= 950, y2=3019, z1=3200, z2=2123
+Time=5895000, x1=3309, y1=2398, x2= 950, y2=3019, z1=1975, z2=1781
+Test passed: x1=3309, y1=2398, x2= 950, y2=3019
+Time=5905000, x1=1750, y1= 319, x2=1609, y2= 377, z1=1975, z2=1781
+Time=5995000, x1=1750, y1= 319, x2=1609, y2= 377, z1=2307, z2= 715
+Test passed: x1=1750, y1= 319, x2=1609, y2= 377
+Time=6005000, x1=2717, y1= 218, x2=2043, y2=3114, z1=2307, z2= 715
+Time=6095000, x1=2717, y1= 218, x2=2043, y2=3114, z1=3073, z2= 183
+Test passed: x1=2717, y1= 218, x2=2043, y2=3114
+Time=6105000, x1=1525, y1=2300, x2=2138, y2=1901, z1=3073, z2= 183
+Time=6195000, x1=1525, y1=2300, x2=2138, y2=1901, z1=2063, z2=2958
+Test passed: x1=1525, y1=2300, x2=2138, y2=1901
+Time=6205000, x1= 177, y1=2829, x2= 333, y2= 350, z1=2063, z2=2958
+Time=6295000, x1= 177, y1=2829, x2= 333, y2= 350, z1=1383, z2=  35
+Test passed: x1= 177, y1=2829, x2= 333, y2= 350
+Time=6305000, x1= 812, y1= 131, x2=3239, y2=1977, z1=1383, z2=  35
+Time=6395000, x1= 812, y1= 131, x2=3239, y2=1977, z1=3173, z2=1836
+Test passed: x1= 812, y1= 131, x2=3239, y2=1977
+Time=6405000, x1=2960, y1=3208, x2=3315, y2=2419, z1=3173, z2=1836
+Time=6495000, x1=2960, y1=3208, x2=3315, y2=2419, z1=1372, z2=2753
+Test passed: x1=2960, y1=3208, x2=3315, y2=2419
+Time=6505000, x1=  10, y1= 885, x2=3043, y2=1617, z1=1372, z2=2753
+Time=6595000, x1=  10, y1= 885, x2=3043, y2=1617, z1=2192, z2= 269
+Test passed: x1=  10, y1= 885, x2=3043, y2=1617
+Time=6605000, x1= 764, y1= 689, x2= 342, y2= 409, z1=2192, z2= 269
+Time=6695000, x1= 764, y1= 689, x2= 342, y2= 409, z1= 414, z2=  60
+Test passed: x1= 764, y1= 689, x2= 342, y2= 409
+Time=6705000, x1=1209, y1=  56, x2= 673, y2= 620, z1= 414, z2=  60
+Time=6795000, x1=1209, y1=  56, x2= 673, y2= 620, z1=1124, z2=1135
+Test passed: x1=1209, y1=  56, x2= 673, y2= 620
+Time=6805000, x1=2721, y1=1015, x2=  41, y2= 601, z1=1124, z2=1135
+Time=6895000, x1=2721, y1=1015, x2=  41, y2= 601, z1=2074, z2=1338
+Test passed: x1=2721, y1=1015, x2=  41, y2= 601
+Time=6905000, x1=2059, y1= 714, x2=1221, y2=2440, z1=2074, z2=1338
+Time=6995000, x1=2059, y1= 714, x2=1221, y2=2440, z1=2037, z2=3114
+Test passed: x1=2059, y1= 714, x2=1221, y2=2440
+Time=7005000, x1= 376, y1=3238, x2=1688, y2=2435, z1=2037, z2=3114
+Time=7095000, x1= 376, y1=3238, x2=1688, y2=2435, z1=2403, z2=2294
+Test passed: x1= 376, y1=3238, x2=1688, y2=2435
+Time=7105000, x1=2599, y1=2545, x2= 193, y2=2975, z1=2403, z2=2294
+Time=7195000, x1=2599, y1=2545, x2= 193, y2=2975, z1=3061, z2=1587
+Test passed: x1=2599, y1=2545, x2= 193, y2=2975
+Time=7205000, x1=2454, y1= 529, x2=3070, y2= 372, z1=3061, z2=1587
+Time=7295000, x1=2454, y1= 529, x2=3070, y2= 372, z1=3185, z2= 193
+Test passed: x1=2454, y1= 529, x2=3070, y2= 372
+Time=7305000, x1=3074, y1= 922, x2=  18, y2=2199, z1=3185, z2= 193
+Time=7395000, x1=3074, y1= 922, x2=  18, y2=2199, z1=1249, z2=2963
+Test passed: x1=3074, y1= 922, x2=  18, y2=2199
+Time=7405000, x1=2439, y1=1735, x2= 230, y2=2184, z1=1249, z2=2963
+Time=7495000, x1=2439, y1=1735, x2= 230, y2=2184, z1= 506, z2=2970
+Test passed: x1=2439, y1=1735, x2= 230, y2=2184
+Time=7505000, x1=2293, y1=3213, x2= 690, y2=1403, z1= 506, z2=2970
+Time=7595000, x1=2293, y1=3213, x2= 690, y2=1403, z1= 332, z2=2660
+Test passed: x1=2293, y1=3213, x2= 690, y2=1403
+Time=7605000, x1=1619, y1= 920, x2=1247, y2= 583, z1= 332, z2=2660
+Time=7695000, x1=1619, y1= 920, x2=1247, y2= 583, z1=1417, z2=1279
+Test passed: x1=1619, y1= 920, x2=1247, y2= 583
+Time=7705000, x1= 804, y1=1937, x2=1622, y2=2059, z1=1417, z2=1279
+Time=7795000, x1= 804, y1=1937, x2=1622, y2=2059, z1=2705, z2= 711
+Test passed: x1= 804, y1=1937, x2=1622, y2=2059
+Time=7805000, x1=1504, y1=2869, x2= 301, y2=1944, z1=2705, z2= 711
+Time=7895000, x1=1504, y1=2869, x2= 301, y2=1944, z1= 592, z2=2569
+Test passed: x1=1504, y1=2869, x2= 301, y2=1944
+Time=7905000, x1= 124, y1=1923, x2=3015, y2= 275, z1= 592, z2=2569
+Time=7995000, x1= 124, y1=1923, x2=3015, y2= 275, z1=2093, z2= 204
+Test passed: x1= 124, y1=1923, x2=3015, y2= 275
+Time=8005000, x1= 110, y1=1963, x2=2219, y2=1222, z1=2093, z2= 204
+Time=8095000, x1= 110, y1=1963, x2=2219, y2=1222, z1=2874, z2=1812
+Test passed: x1= 110, y1=1963, x2=2219, y2=1222
+Time=8105000, x1=2534, y1= 552, x2=1133, y2=2644, z1=2874, z2=1812
+Time=8195000, x1=2534, y1= 552, x2=1133, y2=2644, z1= 588, z2=2881
+Test passed: x1=2534, y1= 552, x2=1133, y2=2644
+Time=8205000, x1= 175, y1=  23, x2= 173, y2=1356, z1= 588, z2=2881
+Time=8295000, x1= 175, y1=  23, x2= 173, y2=1356, z1= 696, z2=1558
+Test passed: x1= 175, y1=  23, x2= 173, y2=1356
+Time=8305000, x1=2552, y1=1306, x2= 671, y2=2362, z1= 696, z2=1558
+Time=8395000, x1=2552, y1=1306, x2= 671, y2=2362, z1= 583, z2= 298
+Test passed: x1=2552, y1=1306, x2= 671, y2=2362
+Time=8405000, x1=2317, y1= 844, x2= 389, y2=2528, z1= 583, z2= 298
+Time=8495000, x1=2317, y1= 844, x2= 389, y2=2528, z1=1425, z2=1337
+Test passed: x1=2317, y1= 844, x2= 389, y2=2528
+Time=8505000, x1=3138, y1=2048, x2=2549, y2=3115, z1=1425, z2=1337
+Time=8595000, x1=3138, y1=2048, x2=2549, y2=3115, z1=1654, z2= 470
+Test passed: x1=3138, y1=2048, x2=2549, y2=3115
+Time=8605000, x1=2528, y1=2938, x2= 961, y2=2337, z1=1654, z2= 470
+Time=8695000, x1=2528, y1=2938, x2= 961, y2=2337, z1= 265, z2=2111
+Test passed: x1=2528, y1=2938, x2= 961, y2=2337
+Time=8705000, x1=2646, y1=2158, x2= 770, y2=1845, z1= 265, z2=2111
+Time=8795000, x1=2646, y1=2158, x2= 770, y2=1845, z1= 833, z2=2496
+Test passed: x1=2646, y1=2158, x2= 770, y2=1845
+Time=8805000, x1=1767, y1=2720, x2=2829, y2=3060, z1= 833, z2=2496
+Time=8895000, x1=1767, y1=2720, x2=2829, y2=3060, z1=2493, z2=1340
+Test passed: x1=1767, y1=2720, x2=2829, y2=3060
+Time=8905000, x1= 196, y1=1259, x2= 223, y2=1963, z1=2493, z2=1340
+Time=8995000, x1= 196, y1=1259, x2= 223, y2=1963, z1= 418, z2=1650
+Test passed: x1= 196, y1=1259, x2= 223, y2=1963
+Time=9005000, x1= 285, y1=2688, x2= 342, y2= 481, z1= 418, z2=1650
+Time=9095000, x1= 285, y1=2688, x2= 342, y2= 481, z1= 410, z2=1381
+Test passed: x1= 285, y1=2688, x2= 342, y2= 481
+Time=9105000, x1= 618, y1=2541, x2= 103, y2=2879, z1= 410, z2=1381
+Time=9195000, x1= 618, y1=2541, x2= 103, y2=2879, z1=2379, z2= 256
+Test passed: x1= 618, y1=2541, x2= 103, y2=2879
+Time=9205000, x1=1900, y1=1433, x2=  31, y2=1165, z1=2379, z2= 256
+Time=9295000, x1=1900, y1=1433, x2=  31, y2=1165, z1=2907, z2=2825
+Test passed: x1=1900, y1=1433, x2=  31, y2=1165
+Time=9305000, x1= 281, y1= 134, x2= 715, y2=2181, z1=2907, z2=2825
+Time=9395000, x1= 281, y1= 134, x2= 715, y2=2181, z1=1035, z2=1443
+Test passed: x1= 281, y1= 134, x2= 715, y2=2181
+Time=9405000, x1= 215, y1= 746, x2=1994, y2= 496, z1=1035, z2=1443
+Time=9495000, x1= 215, y1= 746, x2=1994, y2= 496, z1= 598, z2= 311
+Test passed: x1= 215, y1= 746, x2=1994, y2= 496
+Time=9505000, x1= 516, y1=2709, x2= 336, y2= 731, z1= 598, z2= 311
+Time=9595000, x1= 516, y1=2709, x2= 336, y2= 731, z1=2993, z2=2599
+Test passed: x1= 516, y1=2709, x2= 336, y2= 731
+Time=9605000, x1=3091, y1=3318, x2= 862, y2=2619, z1=2993, z2=2599
+Time=9695000, x1=3091, y1=3318, x2= 862, y2=2619, z1=2618, z2= 516
+Test passed: x1=3091, y1=3318, x2= 862, y2=2619
+Time=9705000, x1= 358, y1=2186, x2=2985, y2=2096, z1=2618, z2= 516
+Time=9795000, x1= 358, y1=2186, x2=2985, y2=2096, z1= 273, z2=1369
+Test passed: x1= 358, y1=2186, x2=2985, y2=2096
+Time=9805000, x1=3164, y1=2859, x2=1386, y2=2169, z1= 273, z2=1369
+Time=9895000, x1=3164, y1=2859, x2=1386, y2=2169, z1= 983, z2= 147
+Test passed: x1=3164, y1=2859, x2=1386, y2=2169
+Time=9905000, x1= 363, y1=3018, x2= 936, y2=1186, z1= 983, z2= 147
+Time=9995000, x1= 363, y1=3018, x2= 936, y2=1186, z1= 293, z2=1539
+Test passed: x1= 363, y1=3018, x2= 936, y2=1186
+Time=10005000, x1=1195, y1= 969, x2=2002, y2=1558, z1= 293, z2=1539
+Time=10095000, x1=1195, y1= 969, x2=2002, y2=1558, z1=2792, z2=3172
+Test passed: x1=1195, y1= 969, x2=2002, y2=1558
+Time=10105000, x1= 658, y1=1585, x2=2380, y2= 500, z1=2792, z2=3172
+Time=10195000, x1= 658, y1=1585, x2=2380, y2= 500, z1= 953, z2=1547
+Test passed: x1= 658, y1=1585, x2=2380, y2= 500
+Time=10205000, x1= 213, y1=1053, x2=2058, y2=2847, z1= 953, z2=1547
+Time=10295000, x1= 213, y1=1053, x2=2058, y2=2847, z1=1246, z2=  86
+Test passed: x1= 213, y1=1053, x2=2058, y2=2847
+Time=10305000, x1=2274, y1=1109, x2=  18, y2= 146, z1=1246, z2=  86
+Time=10395000, x1=2274, y1=1109, x2=  18, y2= 146, z1=1813, z2=2628
+Test passed: x1=2274, y1=1109, x2=  18, y2= 146
+All tests passed!
+$finish called at time : 10405 ns : File "E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.srcs/sim_1/new/DMM_v2_tb.sv" Line 275
