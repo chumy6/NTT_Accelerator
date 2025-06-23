@@ -12,8 +12,8 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Vivado_Project/NTT_Accelerator/N
 INFO: [VRFC 10-311] analyzing module index31_rom
 INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.srcs/sources_1/ip/index7_rom/sim/index7_rom.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module index7_rom
-INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.srcs/sources_1/new/DBU.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module DBU
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.srcs/sources_1/new/DBU_v2.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module DBU_v2
 INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.srcs/sources_1/new/DMM_v2.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module DMM_v2
 INFO: [VRFC 10-2263] Analyzing Verilog file "E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.srcs/sources_1/new/modular_add.v" into library xil_defaultlib

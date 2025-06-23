@@ -2,6 +2,7 @@
 
 //Dual butterfly unit (DBU) with output valid flag
 //===========这个版本是没有资源复用的============//
+//NTT和INTT测试已经通过
 module DBU #(
     parameter [11:0] q = 3329
 )(

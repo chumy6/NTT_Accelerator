@@ -37,7 +37,7 @@ module DBU_tb();
     reg [3:0] test_cnt;
     
     // 实例化被测模块
-    DBU uut (
+    DBU_v2 uut (
         .clk(clk),
         .rst_n(rst_n),
         .func_sel(func_sel),
@@ -64,7 +64,7 @@ module DBU_tb();
     initial begin
         // 初始化
         rst_n = 0;
-        func_sel = 2'b00;
+        func_sel = 1'b0;
         x1 = 12'd0; y1 = 12'd0; w1 = 12'd0;
         x2 = 12'd0; y2 = 12'd0; w2 = 12'd0;
         test_state = IDLE;
@@ -100,7 +100,7 @@ module DBU_tb();
                 
                 INTT_TEST: begin
                     $display("Testing INTT algorithm...");
-                    func_sel = 2'b01;
+                    func_sel = 1'b1;
                     x1 = 12'd11; y1 = 12'd7; w1 = 12'd8;
                     x2 = 12'd12; y2 = 12'd9; w2 = 12'd10;
                     
