@@ -9,7 +9,7 @@ module DBU_tb();
     // 输入信号
     reg clk;
     reg rst_n;
-    reg [1:0] func_sel;
+    reg func_sel;
     reg [11:0] x1, y1, w1;
     reg [11:0] x2, y2, w2;
     
@@ -29,10 +29,9 @@ module DBU_tb();
     localparam IDLE = 3'd0,
                NTT_TEST = 3'd1,
                INTT_TEST = 3'd2,
-               CWM_TEST = 3'd3,
-               COMPARE_RESULTS = 3'd4,
-               WAIT_VALID = 3'd5,
-               WAIT_HW_COMPLETE = 3'd6;  // 新增：等待硬件完成状态
+               COMPARE_RESULTS = 3'd3,
+               WAIT_VALID = 3'd4,
+               WAIT_HW_COMPLETE = 3'd5;  // 新增：等待硬件完成状态
     
     // 测试计数器
     reg [3:0] test_cnt;
@@ -113,20 +112,6 @@ module DBU_tb();
                     test_cnt = 4'd0;
                 end
                 
-                CWM_TEST: begin
-                    $display("Testing CWM algorithm...");
-                    func_sel = 2'b10;
-                    x1 = 12'd100; y1 = 12'd200; w1 = 12'd3;
-                    x2 = 12'd400; y2 = 12'd500; w2 = 12'd7;
-                    
-                    // 计算软件结果
-                    sw_CWM();
-                    
-                    current_test = CWM_TEST;  // 保存当前测试状态
-                    test_state = WAIT_VALID;
-                    test_cnt = 4'd0;
-                end
-                
                 WAIT_VALID: begin
                     // 等待输出有效信号
                     if (dbu_valid) begin
@@ -157,8 +142,7 @@ module DBU_tb();
                     // 根据保存的测试状态切换到下一个测试
                     case (current_test)
                         NTT_TEST: test_state = INTT_TEST;
-                        INTT_TEST: test_state = CWM_TEST;
-                        CWM_TEST: begin
+                        INTT_TEST: begin
                             test_state = IDLE;
                             $display("All tests completed.");
                             $finish;
@@ -220,30 +204,6 @@ module DBU_tb();
         sw_Y2 = Y2_temp_sw >> 1; // 计算Y2 = Y2_temp / 2
         
         $display("INTT software results: X1=%0d, Y1=%0d, X2=%0d, Y2=%0d", sw_X1, sw_Y1, sw_X2, sw_Y2);
-    end
-    endtask
-    
-    // ================================================//
-    // ================= 软件CWM计算 ==================//
-    // ================================================//
-    task sw_CWM;
-    begin
-        integer z1_sw, z2_sw, z3_sw, z4_sw, z5_sw;
-        
-        // 五次模乘
-        z1_sw = (x1 * x2) % q;
-        z2_sw = (y1 * y2) % q;
-        z3_sw = (x1 * y2) % q;
-        z4_sw = (y1 * x2) % q;
-        z5_sw = (w1 * z3_sw) % q;
-        
-        // 两次模加
-        sw_X1 = (z1_sw + z5_sw) % q;
-        sw_Y1 = z3_sw;
-        sw_X2 = z4_sw;
-        sw_Y2 = (z2_sw + z5_sw) % q;
-        
-        $display("CWM software results: X1=%0d, Y1=%0d, X2=%0d, Y2=%0d", sw_X1, sw_Y1, sw_X2, sw_Y2);
     end
     endtask
     

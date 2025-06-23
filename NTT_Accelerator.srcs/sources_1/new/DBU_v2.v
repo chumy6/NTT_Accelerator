@@ -1,319 +1,272 @@
 `timescale 1ns / 1ns
 
 //Dual butterfly unit (DBU).
-module DBU_v2(
-    input clk,
-    input rst_n,
-    input [1:0] func_sel,  // 功能选择，2'b00:NTT, 2'b01:INTT, 2'b10:CWM
-    input [11:0] x1, y1, w1,
-    input [11:0] x2, y2, w2,
-    output reg [11:0] X1, Y1,
-    output reg [11:0] X2, Y2
+//========= 这个版本是尝试资源复用的 ============//
+module DBU_v2 #(
+    parameter [11:0] q = 3329
+)(
+    input               clk,
+    input               rst_n,
+    input               func_sel,  // 0: NTT, 1: INTT
+    input      [11:0]   x1, y1, w1,
+    input      [11:0]   x2, y2, w2,
+    output reg [11:0]   X1, Y1,
+    output reg [11:0]   X2, Y2,
+    output reg          dbu_valid
 );
 
-    // 状态机定义
-    localparam S_IDLE = 3'b000;
-    localparam S_NTT_1 = 3'b001;
-    localparam S_NTT_2 = 3'b010;
-    localparam S_INTT_1 = 3'b011;
-    localparam S_INTT_2 = 3'b100;
-    localparam S_INTT_3 = 3'b101;
-    // CWM操作存疑
-    localparam S_CWM_1 = 3'b110;
-    localparam S_CWM_2 = 3'b111;
+    // 阶段定义
+    localparam ST_IDLE   = 3'd0;
+    localparam ST_NTT_MUL= 3'd1;
+    localparam ST_NTT_ADD= 3'd2;
+    localparam ST_INT_ADD= 3'd3;
+    localparam ST_INT_SUB= 3'd4;
+    localparam ST_INT_MUL= 3'd5;
+    localparam ST_DONE   = 3'd6;
+
+    // 内部信号和寄存器
+    reg [2:0]   state, next_state;
+    reg [3:0]   dmm_latency;      // DMM延迟计数器
+    reg         dmm_busy;         // DMM忙碌标志
+    reg [11:0]  x1_reg, y1_reg, w1_reg;
+    reg [11:0]  x2_reg, y2_reg, w2_reg;
+    reg [11:0]  ntt_z1_reg, ntt_z2_reg;
+    reg [11:0]  intt_t1_madd_reg, intt_t1_msub_reg;
+    reg [11:0]  intt_t2_madd_reg, intt_t2_msub_reg;
+    reg [11:0]  intt_y1_temp_reg, intt_y2_temp_reg;
     
-    reg [2:0] state, next_state;
-    
-    // 中间结果寄存器
-    reg [11:0] z1, z2;           // 模乘结果
-    reg [11:0] t1_madd, t2_madd; // 模加结果
-    reg [11:0] t1_msub, t2_msub; // 模减结果
-    reg [11:0] Y1_temp, Y2_temp; // INTT临时结果
-    
-    // 模加模块控制信号
-    reg madd_en;
-    reg [11:0] madd_a1, madd_b1;
-    reg [11:0] madd_a2, madd_b2;
-    reg [11:0] madd_result1, madd_result2;
-    reg madd_done;
-    
-    // 模减模块控制信号
-    reg msub_en;
-    reg [11:0] msub_a1, msub_b1;
-    reg [11:0] msub_a2, msub_b2;
-    reg [11:0] msub_result1, msub_result2;
-    reg msub_done;
-    
-    // 模乘模块例化
+    // DMM输入输出信号
+    reg [11:0] dmm_x1, dmm_y1, dmm_x2, dmm_y2;
     wire [11:0] dmm_z1, dmm_z2;
-    reg dmm_en;
     
-    DMM_v2 dmm_inst (
+    // 模加模减输入信号
+    reg [11:0] add1_a, add1_b, add2_a, add2_b;
+    reg [11:0] sub1_a, sub1_b, sub2_a, sub2_b;
+    wire [11:0] intt_t1_madd, intt_t2_madd;
+    wire [11:0] intt_t1_msub, intt_t2_msub;
+    
+    // 功能选择编码
+    localparam NTT_MODE = 1'b0;
+    localparam INTT_MODE = 1'b1;
+
+    // 除以2的操作（右移1位）
+    function automatic [11:0] div_by_two;
+        input [11:0] in;
+        begin
+            div_by_two = (in[0] == 1'b1) ? (in + 1'b1) >> 1 : in >> 1;
+        end
+    endfunction
+
+    // 模运算单元实例化
+    DMM_v2 dmm_unit (
         .clk(clk),
         .rst_n(rst_n),
-        .x1(dmm_en ? (func_sel == 2'b00 ? y1 : (func_sel == 2'b01 ? t1_msub : 12'd0)) : 12'd0),
-        .y1(dmm_en ? (func_sel == 2'b00 ? w1 : (func_sel == 2'b01 ? w1 : 12'd0)) : 12'd0),
-        .x2(dmm_en ? (func_sel == 2'b00 ? y2 : (func_sel == 2'b01 ? t2_msub : 12'd0)) : 12'd0),
-        .y2(dmm_en ? (func_sel == 2'b00 ? w2 : (func_sel == 2'b01 ? w2 : 12'd0)) : 12'd0),
+        .x1(dmm_x1),
+        .y1(dmm_y1),
+        .x2(dmm_x2),
+        .y2(dmm_y2),
         .z1(dmm_z1),
         .z2(dmm_z2)
     );
     
-    // 模加/减操作计数器
-    reg [1:0] op_count;
+    modular_add #(.q(q)) add_unit1 (
+        .a(add1_a),
+        .b(add1_b),
+        .T(intt_t1_madd)
+    );
     
-    // 状态机同步逻辑
+    modular_add #(.q(q)) add_unit2 (
+        .a(add2_a),
+        .b(add2_b),
+        .T(intt_t2_madd)
+    );
+    
+    modular_sub #(.q(q)) sub_unit1 (
+        .a(sub1_a),
+        .b(sub1_b),
+        .T(intt_t1_msub)
+    );
+    
+    modular_sub #(.q(q)) sub_unit2 (
+        .a(sub2_a),
+        .b(sub2_b),
+        .T(intt_t2_msub)
+    );
+
+    // 状态机控制
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            state <= S_IDLE;
-            op_count <= 2'd0;
+            state <= ST_IDLE;
+            dmm_latency <= 4'b0;
+            dmm_busy <= 1'b0;
+            dbu_valid <= 1'b0;
         end else begin
             state <= next_state;
             
-            if (madd_en || msub_en) begin
-                op_count <= op_count + 1'b1;
-            end else begin
-                op_count <= 2'd0;
-            end
-        end
-    end
-    
-    // 模加/减模块实现（简化版，实际需要完整的模加/减实现）
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            madd_result1 <= 12'd0;
-            madd_result2 <= 12'd0;
-            msub_result1 <= 12'd0;
-            msub_result2 <= 12'd0;
-            madd_done <= 1'b0;
-            msub_done <= 1'b0;
-        end else begin
-            if (madd_en && op_count == 2'd1) begin
-                // 模加实现（简化版）
-                madd_result1 <= (madd_a1 + madd_b1) % 3329;
-                madd_result2 <= (madd_a2 + madd_b2) % 3329;
-                madd_done <= 1'b1;
-            end else if (madd_en && op_count == 2'd2) begin
-                madd_done <= 1'b0;
+            // DMM延迟计数器控制
+            if (dmm_busy) begin
+                if (dmm_latency < 4'd9) begin
+                    dmm_latency <= dmm_latency + 1'b1;
+                end else begin
+                    dmm_latency <= 4'b0;
+                    dmm_busy <= 1'b0;
+                end
             end
             
-            if (msub_en && op_count == 2'd1) begin
-                // 模减实现（简化版）
-                msub_result1 <= (madd_a1 >= madd_b1) ? (madd_a1 - madd_b1) : (madd_a1 - madd_b1 + 3329);
-                msub_result2 <= (madd_a2 >= madd_b2) ? (madd_a2 - madd_b2) : (madd_a2 - madd_b2 + 3329);
-                msub_done <= 1'b1;
-            end else if (msub_en && op_count == 2'd2) begin
-                msub_done <= 1'b0;
+            // 输出有效标志控制
+            if (state == ST_DONE) begin
+                dbu_valid <= 1'b1;
+            end else begin
+                dbu_valid <= 1'b0;
             end
         end
     end
-    
-    // 次态逻辑
+
+    // 状态转移逻辑
     always @(*) begin
         case (state)
-            S_IDLE:
-                if (func_sel == 2'b00)
-                    next_state = S_NTT_1;
-                else if (func_sel == 2'b01)
-                    next_state = S_INTT_1;
-                else if (func_sel == 2'b10)
-                    next_state = S_CWM_1;
-                else
-                    next_state = S_IDLE;
-            
-            S_NTT_1:
-                if (dmm_en && dmm_z1 != 12'd0) // 假设模乘完成
-                    next_state = S_NTT_2;
-                else
-                    next_state = S_NTT_1;
-            
-            S_NTT_2:
-                if (madd_done && msub_done)
-                    next_state = S_IDLE;
-                else
-                    next_state = S_NTT_2;
-            
-            S_INTT_1:
-                if (madd_done && msub_done)
-                    next_state = S_INTT_2;
-                else
-                    next_state = S_INTT_1;
-            
-            S_INTT_2:
-                if (dmm_en && dmm_z1 != 12'd0) // 假设模乘完成
-                    next_state = S_INTT_3;
-                else
-                    next_state = S_INTT_2;
-            
-            S_INTT_3:
-                next_state = S_IDLE;
-            
-            S_CWM_1:
-                // CWM算法第一步处理
-                if (dmm_en && dmm_z1 != 12'd0) // 假设模乘完成
-                    next_state = S_CWM_2;
-                else
-                    next_state = S_CWM_1;
-            
-            S_CWM_2:
-                // CWM算法第二步处理
-                if (madd_done)
-                    next_state = S_IDLE;
-                else
-                    next_state = S_CWM_2;
-            
+            ST_IDLE:
+                next_state = (func_sel == NTT_MODE) ? ST_NTT_MUL : ST_INT_ADD;
+                
+            ST_NTT_MUL:
+                next_state = (dmm_busy && dmm_latency == 4'd9) ? ST_NTT_ADD : ST_NTT_MUL;
+                
+            ST_NTT_ADD:
+                next_state = ST_DONE;
+                
+            ST_INT_ADD:
+                next_state = ST_INT_SUB;
+                
+            ST_INT_SUB:
+                next_state = ST_INT_MUL;
+                
+            ST_INT_MUL:
+                next_state = (dmm_busy && dmm_latency == 4'd9) ? ST_DONE : ST_INT_MUL;
+                
+            ST_DONE:
+                next_state = ST_IDLE;
+                
             default:
-                next_state = S_IDLE;
+                next_state = ST_IDLE;
         endcase
     end
-    
-    // 输出逻辑
+
+    // 数据路径控制
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            X1 <= 12'd0;
-            Y1 <= 12'd0;
-            X2 <= 12'd0;
-            Y2 <= 12'd0;
-            z1 <= 12'd0;
-            z2 <= 12'd0;
-            t1_madd <= 12'd0;
-            t2_madd <= 12'd0;
-            t1_msub <= 12'd0;
-            t2_msub <= 12'd0;
-            Y1_temp <= 12'd0;
-            Y2_temp <= 12'd0;
-            dmm_en <= 1'b0;
-            madd_en <= 1'b0;
-            msub_en <= 1'b0;
+            x1_reg <= 12'b0;
+            y1_reg <= 12'b0;
+            w1_reg <= 12'b0;
+            x2_reg <= 12'b0;
+            y2_reg <= 12'b0;
+            w2_reg <= 12'b0;
+            ntt_z1_reg <= 12'b0;
+            ntt_z2_reg <= 12'b0;
+            intt_t1_madd_reg <= 12'b0;
+            intt_t1_msub_reg <= 12'b0;
+            intt_t2_madd_reg <= 12'b0;
+            intt_t2_msub_reg <= 12'b0;
+            X1 <= 12'b0;
+            Y1 <= 12'b0;
+            X2 <= 12'b0;
+            Y2 <= 12'b0;
         end else begin
             case (state)
-                S_IDLE: begin
-                    dmm_en <= 1'b0;
-                    madd_en <= 1'b0;
-                    msub_en <= 1'b0;
-                end
-                
-                S_NTT_1: begin
-                    // 启动模乘
-                    dmm_en <= 1'b1;
-                    if (dmm_en && dmm_z1 != 12'd0) begin
-                        z1 <= dmm_z1;
-                        z2 <= dmm_z2;
-                        dmm_en <= 1'b0;
-                        
-                        // 启动模加和模减
-                        madd_en <= 1'b1;
-                        msub_en <= 1'b1;
-                        madd_a1 <= x1;
-                        madd_b1 <= z1;
-                        madd_a2 <= x2;
-                        madd_b2 <= z2;
-                        msub_a1 <= x1;
-                        msub_b1 <= z1;
-                        msub_a2 <= x2;
-                        msub_b2 <= z2;
-                    end
-                end
-                
-                S_NTT_2: begin
-                    if (madd_done && msub_done) begin
-                        X1 <= madd_result1;
-                        Y1 <= msub_result1;
-                        X2 <= madd_result2;
-                        Y2 <= msub_result2;
-                        madd_en <= 1'b0;
-                        msub_en <= 1'b0;
-                    end
-                end
-                
-                S_INTT_1: begin
-                    // 启动模加和模减
-                    madd_en <= 1'b1;
-                    msub_en <= 1'b1;
-                    madd_a1 <= x1;
-                    madd_b1 <= y1;
-                    madd_a2 <= x2;
-                    madd_b2 <= y2;
-                    msub_a1 <= x1;
-                    msub_b1 <= y1;
-                    msub_a2 <= x2;
-                    msub_b2 <= y2;
+                ST_IDLE: begin
+                    // 保存输入数据
+                    x1_reg <= x1;
+                    y1_reg <= y1;
+                    w1_reg <= w1;
+                    x2_reg <= x2;
+                    y2_reg <= y2;
+                    w2_reg <= w2;
                     
-                    if (madd_done && msub_done) begin
-                        t1_madd <= madd_result1;
-                        t2_madd <= madd_result2;
-                        t1_msub <= msub_result1;
-                        t2_msub <= msub_result2;
-                        madd_en <= 1'b0;
-                        msub_en <= 1'b0;
-                        
-                        // 启动模乘
-                        dmm_en <= 1'b1;
+                    if (func_sel == NTT_MODE) begin
+                        // NTT模式：启动第一次模乘
+                        dmm_x1 <= y1;
+                        dmm_y1 <= w1;
+                        dmm_x2 <= y2;
+                        dmm_y2 <= w2;
+                        dmm_busy <= 1'b1;
+                    end else begin
+                        // INTT模式：启动模加
+                        add1_a <= x1;
+                        add1_b <= y1;
+                        add2_a <= x2;
+                        add2_b <= y2;
                     end
                 end
                 
-                S_INTT_2: begin
-                    if (dmm_en && dmm_z1 != 12'd0) begin
-                        Y1_temp <= dmm_z1;
-                        Y2_temp <= dmm_z2;
-                        dmm_en <= 1'b0;
+                ST_NTT_MUL: begin
+                    if (dmm_busy && dmm_latency == 4'd9) begin
+                        // 模乘完成，保存结果
+                        ntt_z1_reg <= dmm_z1;
+                        ntt_z2_reg <= dmm_z2;
+                        
+                        // 启动模加模减
+                        add1_a <= x1_reg;
+                        add1_b <= ntt_z1_reg;
+                        sub1_a <= x1_reg;
+                        sub1_b <= ntt_z1_reg;
+                        add2_a <= x2_reg;
+                        add2_b <= ntt_z2_reg;
+                        sub2_a <= x2_reg;
+                        sub2_b <= ntt_z2_reg;
                     end
                 end
                 
-                S_INTT_3: begin
-                    // 除以2操作（右移一位）
-                    X1 <= t1_madd >> 1;
-                    Y1 <= Y1_temp >> 1;
-                    X2 <= t2_madd >> 1;
-                    Y2 <= Y2_temp >> 1;
+                ST_NTT_ADD: begin
+                    // 保存NTT结果
+                    X1 <= intt_t1_madd;  // 复用add单元的输出
+                    Y1 <= intt_t1_msub;  // 复用sub单元的输出
+                    X2 <= intt_t2_madd;
+                    Y2 <= intt_t2_msub;
                 end
                 
-                S_CWM_1: begin
-                    // CWM算法实现
-                    // 五次模乘: z1 = y1*w1, z2 = y2*w2, z3 = x1*w1, z4 = x2*w2, z5 = y1*y2
-                    // 这里简化为两次模乘，实际需要完整实现
-                    dmm_en <= 1'b1;
-                    if (dmm_en && dmm_z1 != 12'd0) begin
-                        z1 <= dmm_z1;  // y1*w1
-                        z2 <= dmm_z2;  // y2*w2
-                        dmm_en <= 1'b0;
-                        
-                        // 启动下一轮模乘
-                        dmm_en <= 1'b1;
+                ST_INT_ADD: begin
+                    // 保存INTT模加结果
+                    intt_t1_madd_reg <= intt_t1_madd;
+                    intt_t2_madd_reg <= intt_t2_madd;
+                    
+                    // 启动模减
+                    sub1_a <= x1_reg;
+                    sub1_b <= y1_reg;
+                    sub2_a <= x2_reg;
+                    sub2_b <= y2_reg;
+                end
+                
+                ST_INT_SUB: begin
+                    // 保存INTT模减结果
+                    intt_t1_msub_reg <= intt_t1_msub;
+                    intt_t2_msub_reg <= intt_t2_msub;
+                    
+                    // 启动INTT模乘
+                    dmm_x1 <= intt_t1_msub_reg;
+                    dmm_y1 <= w1_reg;
+                    dmm_x2 <= intt_t2_msub_reg;
+                    dmm_y2 <= w2_reg;
+                    dmm_busy <= 1'b1;
+                end
+                
+                ST_INT_MUL: begin
+                    if (dmm_busy && dmm_latency == 4'd9) begin
+                        // 模乘完成，保存结果并除以2
+                        X1 <= div_by_two(intt_t1_madd_reg);
+                        Y1 <= div_by_two(dmm_z1);
+                        X2 <= div_by_two(intt_t2_madd_reg);
+                        Y2 <= div_by_two(dmm_z2);
                     end
                 end
                 
-                S_CWM_2: begin
-                    if (dmm_en && dmm_z1 != 12'd0) begin
-                        // 完成剩余模乘和模加
-                        // ...
-                        
-                        // 启动模加
-                        madd_en <= 1'b1;
-                        madd_a1 <= z1;  // 示例
-                        madd_b1 <= z2;  // 示例
-                        
-                        if (madd_done) begin
-                            X1 <= madd_result1;
-                            Y1 <= z1;  // 示例
-                            X2 <= z2;  // 示例
-                            Y2 <= madd_result1;  // 示例
-                            madd_en <= 1'b0;
-                        end
-                    end
-                end
-                
-                default: begin
-                    X1 <= 12'd0;
-                    Y1 <= 12'd0;
-                    X2 <= 12'd0;
-                    Y2 <= 12'd0;
-                    dmm_en <= 1'b0;
-                    madd_en <= 1'b0;
-                    msub_en <= 1'b0;
+                ST_DONE: begin
+                    // 保持结果
+                    X1 <= X1;
+                    Y1 <= Y1;
+                    X2 <= X2;
+                    Y2 <= Y2;
                 end
             endcase
         end
     end
-    
-endmodule    
+
+endmodule

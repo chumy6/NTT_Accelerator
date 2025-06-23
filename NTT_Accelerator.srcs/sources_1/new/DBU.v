@@ -1,10 +1,13 @@
 `timescale 1ns / 1ns
 
 //Dual butterfly unit (DBU) with output valid flag
-module DBU (
+//===========这个版本是没有资源复用的============//
+module DBU #(
+    parameter [11:0] q = 3329
+)(
     input clk,
     input rst_n,
-    input [1:0] func_sel,  // 功能选择：00-NTT, 01-INTT, 10-CWM
+    input func_sel,  // 功能选择：0-NTT, 1-INTT
     input [11:0] x1, y1, w1,
     input [11:0] x2, y2, w2,
     output reg [11:0] X1, Y1,
@@ -18,19 +21,14 @@ module DBU (
     wire [11:0] intt_t2_madd, intt_t2_msub;
     wire [11:0] intt_y1_temp, intt_y2_temp;  // INTT模乘结果
     
-    // CWM算法信号
-    wire [11:0] cwm_z1, cwm_z2, cwm_z3, cwm_z4, cwm_z5;  // CWM模乘结果
-    wire [11:0] cwm_t1, cwm_t2;                          // CWM模加结果
-    
     // 延迟计数器
-    reg [3:0] dmm_latency_cnt;  // 4位计数器，足够计数10个周期
+    reg [3:0] dmm_latency_cnt;  // 4位计数器，计数10个周期
     
     // 功能选择编码定义
-    localparam NTT_MODE = 2'b00;
-    localparam INTT_MODE = 2'b01;
-    localparam CWM_MODE = 2'b10;
+    localparam NTT_MODE = 1'b0;
+    localparam INTT_MODE = 1'b1;
     
-    // 模乘模块实例化（用于NTT和CWM）
+    // 模乘模块实例化（用于NTT）
     DMM_v2 ntt_dmm (
         .clk(clk),
         .rst_n(rst_n),
@@ -42,7 +40,7 @@ module DBU (
         .z2(ntt_z2)
     );
     
-    // 模加模块实例化（用于INTT和CWM）
+    // 模加模块实例化（用于INTT）
     modular_add intt_add1 (
         .a(x1),
         .b(y1),
@@ -55,7 +53,7 @@ module DBU (
         .T(intt_t2_madd)
     );
     
-    // 模减模块实例化（用于INTT和NTT）(模减的顺序)
+    // 模减模块实例化（用于INTT和NTT）
     modular_sub intt_sub1 (
         .a(x1),
         .b(y1),
@@ -79,62 +77,17 @@ module DBU (
         .z1(intt_y1_temp),
         .z2(intt_y2_temp)
     );
-    
-    // CWM算法需要5个模乘模块和2个模加模块
-    DMM_v2 cwm_dmm1 (
-        .clk(clk),
-        .rst_n(rst_n),
-        .x1(x1),
-        .y1(y1),
-        .x2(x2), 
-        .y2(y2),
-        .z1(cwm_z1),
-        .z2(cwm_z2)
-    );
-    
-    DMM_v2 cwm_dmm2 (
-        .clk(clk),
-        .rst_n(rst_n),
-        .x1(x1),
-        .y1(y1),
-        .x2(x2), 
-        .y2(x2),
-        .z1(cwm_z3),
-        .z2(cwm_z4)
-    );
-    
-    DMM_v2 cwm_dmm3 (
-        .clk(clk),
-        .rst_n(rst_n),
-        .x1(w1),
-        .y1(cwm_z3),
-        .x2(w2), 
-        .y2(cwm_z4),
-        .z1(cwm_z5),
-        .z2() // 第二个输出未使用
-    );
-    
-    modular_add cwm_add1 (
-        .a(cwm_z1),
-        .b(cwm_z5),
-        .T(cwm_t1)
-    );
-    
-    modular_add cwm_add2 (
-        .a(cwm_z2),
-        .b(cwm_z5),
-        .T(cwm_t2)
-    );
-    
-    // 除以2的操作实现（右移一位）
-    function [11:0] div_by_two;
+     
+    // 模除以2的操作
+    function automatic [11:0] div_by_two;
         input [11:0] in;
         begin
-            // 处理奇数情况：(a + 1)/2
-            if (in[0] == 1'b1) begin
-                div_by_two = (in + 1'b1) >> 1;
-            end else begin
+            if (in[0] == 1'b0) begin
+                // 偶数情况：直接右移一位
                 div_by_two = in >> 1;
+            end else begin
+                // 奇数情况：右移一位后加上q+1/2并取模
+                div_by_two = ((in >> 1) + (q+1/2)) % q;
             end
         end
     endfunction
@@ -205,13 +158,6 @@ module DBU (
                     Y1 <= div_by_two(intt_y1_temp);
                     X2 <= div_by_two(intt_t2_madd);
                     Y2 <= div_by_two(intt_y2_temp);
-                end
-                
-                CWM_MODE: begin
-                    X1 <= cwm_t1;
-                    Y1 <= cwm_z3;
-                    X2 <= cwm_z4;
-                    Y2 <= cwm_t2;
                 end
                 
                 default: begin
