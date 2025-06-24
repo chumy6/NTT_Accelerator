@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Tue Jun 24 19:15:48 2025
+# Process ID: 10392
+# Current directory: E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.runs/Mem1_synth_1
+# Command line: vivado.exe -log Mem1.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Mem1.tcl
+# Log file: E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.runs/Mem1_synth_1/Mem1.vds
+# Journal file: E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.runs/Mem1_synth_1\vivado.jou
+#-----------------------------------------------------------
+source Mem1.tcl -notrace

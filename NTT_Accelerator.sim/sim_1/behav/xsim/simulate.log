@@ -2,43 +2,41 @@ Vivado Simulator 2018.3
 Time resolution is 1 ps
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module DBU_tb.uut.dmm_inst.rom_index7_x.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module Top_Design_tb.uut.mem0_inst.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module DBU_tb.uut.dmm_inst.rom_index7_y.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module Top_Design_tb.uut.mem1_inst.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module DBU_tb.uut.dmm_inst.rom_index31_x.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module Top_Design_tb.uut.twiddle_inst.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module DBU_tb.uut.dmm_inst.rom_index31_y.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module Top_Design_tb.uut.dbu_inst.dmm_inst.rom_index7_x.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module DBU_tb.uut.dmm_inst.rom_index32_x.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module Top_Design_tb.uut.dbu_inst.dmm_inst.rom_index7_y.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module DBU_tb.uut.dmm_inst.rom_index32_y.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module Top_Design_tb.uut.dbu_inst.dmm_inst.rom_index31_x.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module DBU_tb.uut.dmm_inst.rom_add7.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module Top_Design_tb.uut.dbu_inst.dmm_inst.rom_index31_y.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module DBU_tb.uut.dmm_inst.rom_add31.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module Top_Design_tb.uut.dbu_inst.dmm_inst.rom_index32_x.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module DBU_tb.uut.dmm_inst.rom_add32.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Block Memory Generator module Top_Design_tb.uut.dbu_inst.dmm_inst.rom_index32_y.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
-Block Memory Generator module DBU_tb.uut.dmm_inst.rom_recon.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
-Testing NTT algorithm...
-NTT software results: X1=7, Y1=3, X2=18, Y2=3323
-Hardware results: X1=7, Y1=3, X2=18, Y2=3323
-PASS: Results match!
-----------------------------------------
-Testing INTT algorithm...
-INTT software results: X1=9, Y1=16, X2=10, Y2=15
-Hardware results: X1=9, Y1=16, X2=10, Y2=15
-PASS: Results match!
-----------------------------------------
-All tests completed.
-$finish called at time : 395 ns : File "E:/Vivado_Project/NTT_Accelerator/NTT_Accelerator.srcs/sim_1/new/DBU_tb.sv" Line 148
+Block Memory Generator module Top_Design_tb.uut.dbu_inst.dmm_inst.rom_add7.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module Top_Design_tb.uut.dbu_inst.dmm_inst.rom_add31.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module Top_Design_tb.uut.dbu_inst.dmm_inst.rom_add32.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module Top_Design_tb.uut.dbu_inst.dmm_inst.rom_recon.inst.native_mem_module.blk_mem_gen_v8_4_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+¿ªÊ¼NTT²âÊÔ...
