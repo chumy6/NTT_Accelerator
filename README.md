@@ -5,7 +5,7 @@ High-Speed Polynomials Multiplication HW Accelerator for CRYSTALS-Kyber
 
 输入的数是 $x_1, y_1$ 和 $x_2, y_2$，$x, y \in \mathbb{Z}_{3329}$，两组数据并行计算，输出的数是 $z_1$ 和 $z_2$，$z = |x \cdot y|_{3329}$。
 
-在这个电路的内部，例化了7个rom，分别是index7_rom、index31_rom、index32_rom、add7_rom、add31_rom、add32_rom和reconstruct_rom。每个rom都是双端口：包含两个clka、clkb信号端口，两个addra、addrb信号端口，两个douta、doutb信号端口，也就是实现两组输入并行计算，即同时计算x1、y1的模乘和x2、y2的模乘结果z1和z2。
+在电路的内部，例化了7个rom，分别是index7_rom、index31_rom、index32_rom、add7_rom、add31_rom、add32_rom和reconstruct_rom。每个rom都是双端口：包含两个clka、clkb信号端口，两个addra、addrb信号端口，两个douta、doutb信号端口，也就是实现两组输入并行计算，即同时计算x1、y1的模乘和x2、y2的模乘结果z1和z2。
 
 下面解释各rom的数据含义和编排方式：
 
@@ -35,7 +35,7 @@ reconstruct_rom的位宽为12，深度为7168，表示7个规模为32乘32的表
 
 顶层设计由5个模块组成：MEM0、MEM1、Twiddle Factors ROM、DBU_v2模块和控制单元（Control Unit）。旋转因子（twiddle factors）被预计算并存储在ROM中。DBU模块实现的功能是将输入的两组数据 x1, y1, w1和x2, y2, w2分别通过蝶形计算输出X1, Y1和X2, Y2。控制单元（Control Unit）生成适当的读写地址，并启动NTT、INTT或CWM操作所需的状态机。
 
-<img src="./images/top.png" alt="Top" width="50%">
+<img src="./images/Top.png" alt="Top" width="50%">
 
 ### 内存Mem的组织方式：
 
