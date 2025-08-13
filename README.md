@@ -3,7 +3,7 @@ High-Speed Polynomials Multiplication HW Accelerator for CRYSTALS-Kyber
 
 ## Dual Modular Multiplier
 
-输入的数是x1, y1和x2，y2，$x, y \in \mathbb{Z}_{3329}$，两组数据并行计算，输出的数是z1和z2，$z=|x \cdot y|_{3329}$。
+输入的数是 $x_1, y_1$ 和 $x_2, y_2$，$x, y \in \mathbb{Z}_{3329}$，两组数据并行计算，输出的数是 $z_1$ 和 $z_2$，$z = |x \cdot y|_{3329}$。
 
 在这个电路的内部，例化了7个rom，分别是index7_rom、index31_rom、index32_rom、add7_rom、add31_rom、add32_rom和reconstruct_rom。每个rom都是双端口：包含两个clka、clkb信号端口，两个addra、addrb信号端口，两个douta、doutb信号端口，也就是实现两组输入并行计算，即同时计算x1、y1的模乘和x2、y2的模乘结果z1和z2。
 
@@ -15,7 +15,7 @@ add7_rom的位宽为3，深度为64，表示一个8乘8规模的表格，也就�
 
 reconstruct_rom的位宽为12，深度为7168，表示7个规模为32乘32的表格，也就是说，前1024行是第一个表格，其中，第1层到第32层是表格的第一行，第33层到第64层是表格的第二行，以此类推，第992层到第1024层是表格的第32行；从1025-2048是第二个表格，以此类推，从6144行到7168行是第7个表格。在查找该reconstruct_rom时，由q1确定页地址，也就是q1确定第几个表格；q2和q3分别给出q1所选中表格的列地址和行地址。
 
-<img src="./images/rom_table.png" alt="rom_table" width="50%">
+<img src="./images/rom_table.png" alt="rom_table" width="80%">
 
 下面解释电路的行为：
 
@@ -35,13 +35,13 @@ reconstruct_rom的位宽为12，深度为7168，表示7个规模为32乘32的表
 
 顶层设计由5个模块组成：MEM0、MEM1、Twiddle Factors ROM、DBU_v2模块和控制单元（Control Unit）。旋转因子（twiddle factors）被预计算并存储在ROM中。DBU模块实现的功能是将输入的两组数据 x1, y1, w1和x2, y2, w2分别通过蝶形计算输出X1, Y1和X2, Y2。控制单元（Control Unit）生成适当的读写地址，并启动NTT、INTT或CWM操作所需的状态机。
 
-<img src="./images/top.png" alt="top" width="50%">
+<img src="./images/top.png" alt="Top" width="50%">
 
 ### 内存Mem的组织方式：
 
 MEM0和MEM1的内存组织方式，Mem0存储偶数下标的系数，每一个地址存储两个系数，例如，Mem0的第一个位置存储a0和a2，单个系数的数据位宽为12（系数的范围为0-3329），Mem1的第一个位置存储a1和a3，对于系数a由0-127分别存储在Mem0和Mem1的前32行。而对于系数b，Mem0存储计数下标的系数，每一个地址存储两个系数，例如，Mem0的第33行存储b1和b3，Mem1的第33行存储b0和b2，系数b分别存储在第33行到64行。在取数据的时候，a系数从第一行开始取，b系数从第64行开始取，以此实现顺序相反的取数据，以便在CWM过程中实现高效访问。
 
-<img src="./images/mem.png" alt="mem" width="50%">
+<img src="./images/mem.png" alt="mem" width="80%">
 
 ### Twiddle Factors ROM的组织方式：
 
